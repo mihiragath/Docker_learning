@@ -6,9 +6,10 @@ FROM node:20-alpine3.18
 WORKDIR /app
 
 # Copy package.json and package-lock.json first to leverage Docker cache
-COPY package.json .
-COPY package-lock.json .
-
+COPY package*.json .
+# COPY package.json .
+# COPY package-lock.json .
+ 
 # Install dependencies
 # This will install the dependencies defined in package.json
 RUN npm install
