@@ -114,5 +114,24 @@ Run 'docker image COMMAND --help' for more information on a command.
 docker run --name alyceNameOfContainer containerName to change container name
 
 docker build -t my-node-app .
-    to built docker image
-    This command builds the Docker image using the Dockerfile in the current directory
+to built docker image
+This command builds the Docker image using the Dockerfile in the current directory
+
+for mapping port to run code container machin to out desktop machine
+docker run -it/-itd -p machine_port:container_post -p machine_port:container_post -p machine_port:container_post app_name
+or
+for multiple ports running easily
+docker run -it/-itd -P app-name difference between -it means its block the terminal or -itd meand container run in background not block terminal
+or
+docker run -itd/-it -P --rm app-name after close container container automatically removed
+
+build image according to hub.docker.com web docker publish repository
+docker build -t mihiragath/example_app
+
+to push code on publish repository use push command
+docker push mihiragath/example_app
+
+to use out publish doker file 
+docker pull mihiragath/example_app
+
+
