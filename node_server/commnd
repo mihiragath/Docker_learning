@@ -134,4 +134,11 @@ docker push mihiragath/example_app
 to use out publish doker file 
 docker pull mihiragath/example_app
 
+for multistaging 
+to build image
+docker build -t image_name -f dockerfile_name
+
+
+
+
 
