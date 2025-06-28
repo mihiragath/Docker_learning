@@ -175,11 +175,32 @@ docker network disconnect network_name container_name
 Docker volume
 Docker volume is the solution which is related to if any container was deleted then all data which will inside the containder also it will be deleted with the container 
 
-Docker Volume
+Basic Command
+Usage:  docker volume COMMAND
+
+Manage volumes
+
+Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes      
+  ls          List volumes
+  prune       Remove unused local volumes
+  rm          Remove one or more volumes
+  update      Update a volume (cluster volumes only)
+
+way to use docker volume
 1]data store on local device
 2]data store on docker volume
 
-1]
+1]set of commands are used to store data on local device
+docker run -it -v C:\Users\Speed\OneDrive\Desktop:/home/ubuntu/mihir --rm ubuntu
+                    connect container with local system
+
+
+2]using docker volume
+docker volume create volume_name
+docker run -it --rm -v volume_name:path_in_container 
+                       connect container with volume
 
 
 
