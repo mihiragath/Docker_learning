@@ -138,7 +138,9 @@ for multistaging
 to build image
 docker build -t image_name -f dockerfile_name
 
+
 Docker Network Command
+using network that all containers which will inside the same network that all be communicate with each other
 docker network // for showing all network related commands
 
 Usage:  docker network COMMAND
@@ -158,7 +160,26 @@ docker network ls // to show all network
 
 docker network inspect network_name // showing detail about specific network
 
+TO create user define network
+docker network create network_name
+to use user define network use
+docker run --itd --network=network_name --rm --name=alyce_container_name container_name 
+to check if both container communicate vice versa or not
+docker exec container1_name ping second_container_ip_address//name
+To connect container with another network use
+docker network connect network_name container_name 
+To disconnect container with another network use
+docker network disconnect network_name container_name 
 
+
+Docker volume
+Docker volume is the solution which is related to if any container was deleted then all data which will inside the containder also it will be deleted with the container 
+
+Docker Volume
+1]data store on local device
+2]data store on docker volume
+
+1]
 
 
 
