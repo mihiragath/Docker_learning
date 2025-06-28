@@ -1,0 +1,214 @@
+You said:
+docker --version show version of docker
+
+docker login -u <username> login into docker system
+
+docker run -it <container_name> to use different differne docker images
+
+docker pull <images> to pull image from docker hub
+
+docker --help to get more info about different different commands
+
+Usage: docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+run Create and run a new container from an image
+exec Execute a command in a running container
+ps List containers
+build Build an image from a Dockerfile
+bake Build from a file
+pull Download an image from a registry
+push Upload an image to a registry
+images List images
+login Authenticate to a registry
+logout Log out from a registry
+search Search Docker Hub for images
+version Show the Docker version information
+info Display system-wide information
+
+Swarm Commands:
+swarm Manage Swarm
+
+Commands:
+attach Attach local standard input, output, and error streams to a running container
+commit Create a new image from a container's changes
+cp Copy files/folders between a container and the local filesystem
+create Create a new container
+diff Inspect changes to files or directories on a container's filesystem
+events Get real time events from the server
+export Export a container's filesystem as a tar archive
+history Show the history of an image
+import Import the contents from a tarball to create a filesystem image
+inspect Return low-level information on Docker objects
+kill Kill one or more running containers
+load Load an image from a tar archive or STDIN
+logs Fetch the logs of a container
+pause Pause all processes within one or more containers
+port List port mappings or a specific mapping for the container
+rename Rename a container
+restart Restart one or more containers
+rm Remove one or more containers
+rmi Remove one or more images
+save Save one or more images to a tar archive (streamed to STDOUT by default)
+start Start one or more stopped containers
+stats Display a live stream of container(s) resource usage statistics
+stop Stop one or more running containers
+tag Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+top Display the running processes of a container
+unpause Unpause all processes within one or more containers
+update Update configuration of one or more containers
+wait Block until one or more containers stop, then print their exit codes
+
+Usage: docker container COMMAND
+
+Manage containers
+
+Commands:
+attach Attach local standard input, output, and error streams to a running container
+commit Create a new image from a container's changes
+cp Copy files/folders between a container and the local filesystem
+create Create a new container
+diff Inspect changes to files or directories on a container's filesystem
+exec Execute a command in a running container
+export Export a container's filesystem as a tar archive
+inspect Display detailed information on one or more containers
+kill Kill one or more running containers
+logs Fetch the logs of a container
+ls List containers
+pause Pause all processes within one or more containers
+port List port mappings or a specific mapping for the container
+prune Remove all stopped containers
+rename Rename a container
+restart Restart one or more containers
+rm Remove one or more containers
+run Create and run a new container from an image
+start Start one or more stopped containers
+stats Display a live stream of container(s) resource usage statistics
+stop Stop one or more running containers
+top Display the running processes of a container
+unpause Unpause all processes within one or more containers
+update Update configuration of one or more containers
+wait Block until one or more containers stop, then print their exit codes
+
+Usage: docker image COMMAND
+
+Manage images
+
+Commands:
+build Build an image from a Dockerfile
+history Show the history of an image
+import Import the contents from a tarball to create a filesystem image
+inspect Display detailed information on one or more images
+load Load an image from a tar archive or STDIN
+ls List images
+prune Remove unused images
+pull Download an image from a registry
+push Upload an image to a registry
+rm Remove one or more images
+save Save one or more images to a tar archive (streamed to STDOUT by default)
+tag Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+
+docker run --name alyceNameOfContainer containerName to change container name
+
+docker build -t my-node-app .
+to built docker image
+This command builds the Docker image using the Dockerfile in the current directory
+
+for mapping port to run code container machin to out desktop machine
+docker run -it/-itd -p machine_port:container_post -p machine_port:container_post -p machine_port:container_post app_name
+or
+for multiple ports running easily
+docker run -it/-itd -P app-name difference between -it means its block the terminal or -itd meand container run in background not block terminal
+or
+docker run -itd/-it -P --rm app-name after close container container automatically removed
+
+build image according to hub.docker.com web docker publish repository
+docker build -t mihiragath/example_app
+
+to push code on publish repository use push command
+docker push mihiragath/example_app
+
+to use out publish doker file 
+docker pull mihiragath/example_app
+
+for multistaging 
+to build image
+docker build -t image_name -f dockerfile_name
+
+
+Docker Network Command
+using network that all containers which will inside the same network that all be communicate with each other
+docker network // for showing all network related commands
+
+Usage:  docker network COMMAND
+
+Manage networks
+
+Commands:
+  connect     Connect a container to a network
+  create      Create a network
+  disconnect  Disconnect a container from a network
+  inspect     Display detailed information on one or more networks
+  ls          List networks
+  prune       Remove all unused networks
+  rm          Remove one or more networks
+
+docker network ls // to show all network
+
+docker network inspect network_name // showing detail about specific network
+
+TO create user define network
+docker network create network_name
+to use user define network use
+docker run --itd --network=network_name --rm --name=alyce_container_name container_name 
+to check if both container communicate vice versa or not
+docker exec container1_name ping second_container_ip_address//name
+To connect container with another network use
+docker network connect network_name container_name 
+To disconnect container with another network use
+docker network disconnect network_name container_name 
+
+
+Docker volume
+Docker volume is the solution which is related to if any container was deleted then all data which will inside the containder also it will be deleted with the container 
+
+Basic Command
+Usage:  docker volume COMMAND
+
+Manage volumes
+
+Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes      
+  ls          List volumes
+  prune       Remove unused local volumes
+  rm          Remove one or more volumes
+  update      Update a volume (cluster volumes only)
+
+way to use docker volume
+1]data store on local device
+2]data store on docker volume
+
+1]set of commands are used to store data on local device
+docker run -it -v C:\Users\Speed\OneDrive\Desktop:/home/ubuntu/mihir --rm ubuntu
+                    connect container with local system
+
+
+2]using docker volume
+docker volume create volume_name
+docker run -it --rm -v volume_name:path_in_container 
+                       connect container with volume
+
+
+
+Docker compose
+
+ using command there are multiple container start at a time called docker compose
+ To run file
+ docker compose up -d
+ to stop 
+ docker compose down 

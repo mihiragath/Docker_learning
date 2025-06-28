@@ -1,0 +1,57 @@
+# -------- Base Image --------
+# Start from a lightweight Node.js image
+FROM node:20-alpine AS base
+
+# Set working directory inside the container
+WORKDIR /app
+
+# -------- Builder Stage --------
+# Use the base image to install dependencies and build the app
+FROM base AS builder
+
+# Copy package files and TypeScript config to install dependencies
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Install all dependencies (including devDependencies)
+RUN npm install
+
+# Copy rest of the application code
+COPY . .
+
+# Build the project (typically compiles TypeScript to JavaScript)
+RUN npm run build
+
+# -------- Production Stage --------
+# Final stage: only include what's needed to run the app
+FROM base AS production
+
+WORKDIR /app
+
+# Copy only the built output and required files from builder
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/tsconfig.json ./
+
+# Install only production dependencies
+RUN npm install --omit=dev
+
+# Clean up npm cache to reduce image size
+RUN npm cache clean --force
+
+# Expose the internal container port
+EXPOSE 3000
+
+# Set environment variable for the app
+ENV PORT=8000
+
+# Start the application
+CMD ["node", "dist/index.js"]
+
+
+#to run docker file
+#docker run -it -p 3000:8000 --rm -e=8000 image_name
+
+#to build this dockwr new file
+#docker build -t image-name -f Dockerfile.new .
+

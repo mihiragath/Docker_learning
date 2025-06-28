@@ -1,0 +1,51 @@
+version: '3.8'  # Specifies the version of the Docker Compose file format
+
+services:
+  # NGINX Web Server Service
+  nginx:
+    image: nginx:latest  # Use the latest official NGINX image from Docker Hub
+    container_name: nginx_container  # Name of the container
+    ports:
+      - "80:80"  # Map host port 80 to container port 80
+    volumes:
+      - ./nginx_data:/usr/share/nginx/html  # Mount a local folder to serve static HTML files (corrected path)
+    networks:
+      - my_network  # Connect this container to the custom network
+    # The 'entrypoint' section is not used correctly here; removing it.
+    # If you meant to pass an environment variable or configure the port,
+    # use the environment section or command instead.
+
+  # Alpine-based Service (lightweight Linux)
+  alpine:
+    image: alpine:latest  # Use the latest Alpine image
+    container_name: alpine_container
+    ports:
+      - "8080:80"  # Map host port 8080 to container port 80 (useful if Alpine runs a web server)
+    volumes:
+      - ./alpine_data:/data  # Mount a local folder to container's /data
+    networks:
+      - my_network
+    environment:
+      - ALPINE_PORT=6379  # Set an environment variable inside the container
+
+  # Redis Database Service
+  redis:
+    image: redis:latest  # Use the latest Redis image
+    container_name: redis_container
+    ports:
+      - "6379:6379"  # Map host port 6379 to container port 6379
+    networks:
+      - my_network
+    environment:
+      - REDIS_PORT=6379  # Set an environment variable inside the container
+
+# Define named volumes (for persistent storage if needed in the future)
+volumes:
+  nginx_data:
+  alpine_data:
+  redis_data:
+
+# Define a custom bridge network for containers to communicate with each other
+networks:
+  my_network:
+    driver: bridge
